@@ -3,14 +3,15 @@ import numpy as np
 
 from Perceptron import Perceptron
 
+def drawLine(pt1, pt2):
+    plt.plot( [pt1[0], pt2[0]] , [pt1[0], pt2[0]]   , 'ro', color= 'g')
 
-def drawLine(perceptron):
-    weights = perceptron.getWeights()
+def computePt(x0, weights, bias=0):
     w0 = weights[0]
     w1 = weights[1]
-    pt1 = -w0 * -1 / w1
-    pt2 = -w0 * 1 / w1
-    plt.plot( [ -1, 1 ] , [ pt1 , pt2 ] )
+    x1 = ( - w0 * x0 - bias ) / w1
+    return np.array([x0, x1])
+
 
 def generateData(n):
     """
@@ -44,15 +45,13 @@ plt.plot(bluePoints[:,0], bluePoints[:,1], 'ro', color='b')
 plt.plot(redPoints[:,0], redPoints[:,1], 'ro', color='r')
 
 
-p = Perceptron(datas[0].shape)
+p = Perceptron(datas[0].shape, 0.1)
 
 p.train(datas, targets)
 
-guess = p.guess(datas)
-
-scores = guess - targets[:,0]
-drawLine(p)
-
+pt1 = computePt(-1, p.getWeights())
+pt2 = computePt(1, p.getWeights())
+drawLine(pt1, pt2)
 
 plt.ylabel('Y axis')
 plt.xlabel('X axis')

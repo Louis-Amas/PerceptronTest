@@ -18,7 +18,7 @@ def computePt(x0, weights, bias=0):
 
 
 def drawLine(pt1, pt2):
-    plt.plot( [pt1[0], pt2[0]] , [pt1[0], pt2[0]]   , 'ro', color= 'g')
+    plt.plot( [pt1[0], pt2[0]] , [pt1[0], pt2[0]]  , 'ro', color= 'g')
 
 
 
@@ -66,12 +66,16 @@ max = np.amax(points[:,0])
 min = np.amin(points[:,0])
 
 
-pt1 = computePt(min, perceptron.getWeights(),1)
-pt2 = computePt(max, perceptron.getWeights(),1)
+
+pt3 = computePt(min, perceptron.getWeights(), bias=1)
+pt4 = computePt(max, perceptron.getWeights(), bias=1)
+
+print(pt3, pt4)
+drawLine(pt3, pt4)
+
 plt.plot(bluePoints[:,0], bluePoints[:,1], 'ro', color='b')
 plt.plot(redPoints[:,0], redPoints[:,1], 'ro', color='r')
 
-drawLine(pt1, pt2)
 
 plt.ylabel('Y axis')
 plt.xlabel('X axis')
